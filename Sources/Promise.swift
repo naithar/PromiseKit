@@ -76,9 +76,11 @@ public extension Promise {
      */
     public func wait() throws -> T {
 
+#if !os(Linux)
         if Thread.isMainThread {
             print("PromiseKit: warning: `wait()` called on main thread!")
         }
+#endif
 
         var result = self.result
 
